@@ -14,15 +14,14 @@ In active development — Projects CRUD complete, Tasks & Kanban in progress.
 - NextAuth.js v5
 
 ## Features
-- [x] Email/password authentication
-- [x] Google OAuth
-- [x] JWT session management
-- [x] Protected routes via middleware
-- [x] Projects CRUD (create, read, update, delete)
-- [ ] Tasks CRUD
-- [ ] Kanban board with drag and drop
-- [ ] Activity logging
+- [x] Tasks CRUD (create, read, update, delete)
+- [x] Kanban board columns (To Do, In Progress, Done)
+- [x] Priority levels (Low, Medium, High)
+- [x] Due dates on tasks
+- [x] Activity logging on task actions
+- [ ] Drag and drop Kanban
 - [ ] Dashboard with stats
+- [ ] Dark mode + filters
 
 ## Getting Started
 
