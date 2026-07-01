@@ -1,38 +1,48 @@
 # DevBoard
 
-A full-stack developer task and project tracking tool built with Next.js, PostgreSQL, and Prisma.
+A full-stack developer task and project management tool with Kanban board, authentication, and activity logging.
 
 ## 🚧 Status
-Under active development.
+In active development — Auth complete, Projects CRUD in progress.
 
 ## Tech Stack
-- Next.js 14 (App Router)
+- Next.js 15 (App Router)
 - TypeScript
 - Tailwind CSS
 - PostgreSQL (Neon)
-- Prisma ORM
-- NextAuth.js
+- Prisma ORM v5
+- NextAuth.js v5
+
+## Features
+- [x] Email/password authentication
+- [x] Google OAuth
+- [x] JWT session management
+- [x] Protected routes via middleware
+- [ ] Project management (CRUD)
+- [ ] Kanban board with drag and drop
+- [ ] Activity logging
+- [ ] Dashboard with stats
 
 ## Getting Started
 
-Clone the repo and install dependencies:
-
 ```bash
-git clone https://github.com/wzeion/devboard
+git clone https://github.com/yourusername/devboard.git
 cd devboard
 npm install
 ```
 
-Add your `.env` file (see `.env.example`), then:
+Create a `.env` file:
+```env
+DATABASE_URL=
+NEXTAUTH_SECRET=
+NEXTAUTH_URL=
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+```
 
+Then:
 ```bash
+npx prisma generate
 npx prisma db push
 npm run dev
 ```
-
-## Features (In Progress)
-- [ ] Authentication (Email + Google OAuth)
-- [ ] Project management
-- [ ] Kanban board with drag and drop
-- [ ] Activity logging
-- [ ] Dashboard with stats
