@@ -26,7 +26,7 @@ In active development — Projects CRUD complete, Tasks & Kanban in progress.
 ## Getting Started
 
 ```bash
-git clone https://github.com/yourusername/devboard.git
+git clone https://github.com/wzeion/devboard
 cd devboard
 npm install
 ```
