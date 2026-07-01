@@ -3,7 +3,7 @@
 A full-stack developer task and project management tool with Kanban board, authentication, and activity logging.
 
 ## 🚧 Status
-In active development — Auth complete, Projects CRUD in progress.
+In active development — Projects CRUD complete, Tasks & Kanban in progress.
 
 ## Tech Stack
 - Next.js 15 (App Router)
@@ -18,7 +18,8 @@ In active development — Auth complete, Projects CRUD in progress.
 - [x] Google OAuth
 - [x] JWT session management
 - [x] Protected routes via middleware
-- [ ] Project management (CRUD)
+- [x] Projects CRUD (create, read, update, delete)
+- [ ] Tasks CRUD
 - [ ] Kanban board with drag and drop
 - [ ] Activity logging
 - [ ] Dashboard with stats

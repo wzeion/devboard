@@ -24,7 +24,7 @@ model Project{
   id String @id @default(cuid())
   title String
   description String?
-  techstack String[]
+  techStack String[]
   tasks Task[]
   logs ActivityLog[]
   userId String
