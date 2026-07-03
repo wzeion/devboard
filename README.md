@@ -14,14 +14,13 @@ In active development — Projects CRUD complete, Tasks & Kanban in progress.
 - NextAuth.js v5
 
 ## Features
-- [x] Tasks CRUD (create, read, update, delete)
-- [x] Kanban board columns (To Do, In Progress, Done)
-- [x] Priority levels (Low, Medium, High)
-- [x] Due dates on tasks
-- [x] Activity logging on task actions
-- [ ] Drag and drop Kanban
-- [ ] Dashboard with stats
-- [ ] Dark mode + filters
+- [x] Dashboard with stats (total projects, tasks, completed, in progress)
+- [x] Bar chart showing tasks by status
+- [x] Real-time activity log
+- [x] Navigation bar across all pages
+- [ ] Dark mode toggle
+- [ ] Task filters
+- [ ] Deployment
 
 ## Getting Started
 
