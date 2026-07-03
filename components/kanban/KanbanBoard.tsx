@@ -24,21 +24,21 @@ interface Props {
 }
 
 const priorityColors = {
-  LOW: "text-green-500 dark:text-green-400",
-  MEDIUM: "text-yellow-500 dark:text-yellow-400",
-  HIGH: "text-red-500 dark:text-red-400",
+  LOW: "text-emerald-500",
+  MEDIUM: "text-amber-400",
+  HIGH: "text-red-400",
 };
 
 const priorityBg = {
-  LOW: "bg-green-400/10",
-  MEDIUM: "bg-yellow-400/10",
+  LOW: "bg-emerald-500/10",
+  MEDIUM: "bg-amber-400/10",
   HIGH: "bg-red-400/10",
 };
 
 const columns = [
-  { id: "TODO", label: "To Do", color: "border-t-gray-400 dark:border-t-gray-500" },
-  { id: "IN_PROGRESS", label: "In Progress", color: "border-t-blue-500" },
-  { id: "DONE", label: "Done", color: "border-t-green-500" },
+  { id: "TODO", label: "To Do", accent: "border-t-gray-400" },
+  { id: "IN_PROGRESS", label: "In Progress", accent: "border-t-amber-400" },
+  { id: "DONE", label: "Done", accent: "border-t-emerald-500" },
 ] as const;
 
 export default function KanbanBoard({ tasks, onStatusChange, onDelete }: Props) {
@@ -50,7 +50,6 @@ export default function KanbanBoard({ tasks, onStatusChange, onDelete }: Props) 
 
   function onDragEnd(result: DropResult) {
     const { destination, source, draggableId } = result;
-
     if (!destination) return;
     if (
       destination.droppableId === source.droppableId &&
@@ -73,20 +72,20 @@ export default function KanbanBoard({ tasks, onStatusChange, onDelete }: Props) 
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {columns.map((col) => {
           const columnTasks = localTasks.filter((t) => t.status === col.id);
           return (
             <div
               key={col.id}
-              className={`bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 border-t-2 ${col.color}`}
+              className={`bg-white dark:bg-[#161b22] rounded-lg border border-gray-200 dark:border-[#30363d] border-t-2 ${col.accent}`}
             >
-              <div className="p-4 border-b border-gray-100 dark:border-gray-800">
+              <div className="px-4 py-3 border-b border-gray-100 dark:border-[#21262d]">
                 <div className="flex items-center justify-between">
-                  <h2 className="font-semibold text-gray-700 dark:text-gray-200">
+                  <h2 className="font-semibold text-sm text-gray-700 dark:text-gray-300">
                     {col.label}
                   </h2>
-                  <span className="text-xs bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 px-2 py-1 rounded-full">
+                  <span className="text-xs bg-gray-100 dark:bg-[#21262d] text-gray-500 dark:text-[#8b949e] px-2 py-0.5 rounded-full font-medium">
                     {columnTasks.length}
                   </span>
                 </div>
@@ -97,9 +96,9 @@ export default function KanbanBoard({ tasks, onStatusChange, onDelete }: Props) 
                   <div
                     ref={provided.innerRef}
                     {...provided.droppableProps}
-                    className={`p-3 min-h-[200px] transition-all duration-200 rounded-b-xl ${
+                    className={`p-3 min-h-[200px] transition-all duration-150 rounded-b-lg ${
                       snapshot.isDraggingOver
-                        ? "bg-gray-100 dark:bg-gray-800/40 border-2 border-dashed border-gray-300 dark:border-gray-600"
+                        ? "bg-emerald-500/5 border-2 border-dashed border-emerald-500/30"
                         : "border-2 border-transparent"
                     }`}
                   >
@@ -113,45 +112,45 @@ export default function KanbanBoard({ tasks, onStatusChange, onDelete }: Props) 
                           <div
                             ref={provided.innerRef}
                             {...provided.draggableProps}
-                            className={`bg-gray-50 dark:bg-gray-800 rounded-lg p-4 mb-3 border transition-all ${
+                            className={`group bg-gray-50 dark:bg-[#0d1117] rounded-md p-3.5 mb-2.5 border transition-all ${
                               snapshot.isDragging
-                                ? "border-blue-500 shadow-lg shadow-blue-500/20 rotate-1"
-                                : "border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600"
+                                ? "border-emerald-500 shadow-lg shadow-emerald-500/10 rotate-1 scale-105"
+                                : "border-gray-200 dark:border-[#30363d] hover:border-gray-300 dark:hover:border-[#484f58]"
                             }`}
                           >
                             <div className="flex items-start gap-2">
                               <div
                                 {...provided.dragHandleProps}
-                                className="text-gray-300 dark:text-gray-600 hover:text-gray-500 dark:hover:text-gray-400 mt-0.5 cursor-grab active:cursor-grabbing"
+                                className="text-gray-300 dark:text-[#30363d] hover:text-gray-400 dark:hover:text-[#8b949e] mt-0.5 cursor-grab active:cursor-grabbing transition-colors"
                               >
-                                <GripVertical size={16} />
+                                <GripVertical size={14} />
                               </div>
                               <div className="flex-1 min-w-0">
-                                <div className="flex items-start justify-between gap-2 mb-2">
-                                  <h3 className="font-medium text-sm text-gray-900 dark:text-white leading-snug">
+                                <div className="flex items-start justify-between gap-2 mb-1.5">
+                                  <h3 className="font-medium text-sm text-gray-900 dark:text-[#e6edf3] leading-snug">
                                     {task.title}
                                   </h3>
                                   <button
                                     onClick={() => onDelete(task.id)}
-                                    className="text-gray-300 dark:text-gray-600 hover:text-red-400 transition shrink-0"
+                                    className="text-gray-300 dark:text-[#30363d] hover:text-red-400 transition shrink-0 opacity-0 group-hover:opacity-100"
                                   >
-                                    <Trash2 size={14} />
+                                    <Trash2 size={13} />
                                   </button>
                                 </div>
                                 {task.description && (
-                                  <p className="text-gray-500 dark:text-gray-400 text-xs mb-3 leading-relaxed">
+                                  <p className="text-gray-400 dark:text-[#8b949e] text-xs mb-2.5 leading-relaxed">
                                     {task.description}
                                   </p>
                                 )}
                                 <div className="flex items-center justify-between">
                                   <span
-                                    className={`flex items-center gap-1 text-xs px-2 py-0.5 rounded-full ${priorityColors[task.priority]} ${priorityBg[task.priority]}`}
+                                    className={`flex items-center gap-1 text-xs px-1.5 py-0.5 rounded ${priorityColors[task.priority]} ${priorityBg[task.priority]} font-medium`}
                                   >
-                                    <Flag size={10} />
+                                    <Flag size={9} />
                                     {task.priority}
                                   </span>
                                   {task.dueDate && (
-                                    <span className="flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500">
+                                    <span className="flex items-center gap-1 text-xs text-gray-400 dark:text-[#8b949e]">
                                       <Calendar size={10} />
                                       {new Date(task.dueDate).toLocaleDateString()}
                                     </span>

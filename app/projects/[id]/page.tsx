@@ -84,46 +84,51 @@ export default function ProjectPage() {
 
   if (loading)
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex items-center justify-center">
+      <div className="min-h-screen bg-white dark:bg-[#0d1117] flex items-center justify-center">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
-          <p className="text-gray-500 dark:text-gray-400 text-sm">
-            Loading board...
-          </p>
+          <div className="w-6 h-6 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin" />
+          <p className="text-gray-400 text-sm">Loading board...</p>
         </div>
       </div>
     );
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-white p-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-[#0d1117] text-gray-900 dark:text-[#e6edf3] p-8 fade-up">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4">
             <Link
               href="/projects"
-              className="text-gray-400 hover:text-gray-900 dark:hover:text-white transition"
+              className="p-1.5 rounded-md text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#161b22] transition-all"
             >
-              <ArrowLeft size={20} />
+              <ArrowLeft size={18} />
             </Link>
-            <h1 className="text-3xl font-bold">Project Board</h1>
+            <div>
+              <h1 className="text-2xl font-bold tracking-tight">
+                Project Board
+              </h1>
+              <p className="text-gray-500 dark:text-gray-400 text-sm mt-0.5">
+                {tasks.length} task{tasks.length !== 1 ? "s" : ""} total
+              </p>
+            </div>
           </div>
           <button
             onClick={() => setShowModal(true)}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium"
+            className="flex items-center gap-2 px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-md font-medium text-sm transition-all"
           >
-            <Plus size={18} /> New Task
+            <Plus size={15} /> New Task
           </button>
         </div>
 
         {/* Filter Bar */}
         <div className="flex items-center gap-3 mb-6">
-          <span className="text-sm text-gray-500 dark:text-gray-400">
-            Filter:
+          <span className="text-xs font-medium uppercase tracking-wider text-gray-400">
+            Filter
           </span>
           <select
             value={priorityFilter}
             onChange={(e) => setPriorityFilter(e.target.value)}
-            className="text-sm px-3 py-1.5 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 focus:outline-none"
+            className="text-sm px-3 py-1.5 rounded-md bg-white dark:bg-[#161b22] text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-[#30363d] focus:outline-none focus:border-emerald-500 transition-all"
           >
             <option value="ALL">All Priorities</option>
             <option value="LOW">Low</option>
@@ -133,7 +138,7 @@ export default function ProjectPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="text-sm px-3 py-1.5 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 focus:outline-none"
+            className="text-sm px-3 py-1.5 rounded-md bg-white dark:bg-[#161b22] text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-[#30363d] focus:outline-none focus:border-emerald-500 transition-all"
           >
             <option value="ALL">All Statuses</option>
             <option value="TODO">To Do</option>
@@ -146,7 +151,7 @@ export default function ProjectPage() {
                 setPriorityFilter("ALL");
                 setStatusFilter("ALL");
               }}
-              className="text-sm text-blue-500 hover:text-blue-400"
+              className="text-xs text-emerald-500 hover:text-emerald-400 font-medium transition-all"
             >
               Clear filters
             </button>
@@ -161,48 +166,50 @@ export default function ProjectPage() {
       </div>
 
       {showModal && (
-        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-gray-900 rounded-xl p-8 w-full max-w-md space-y-4 border border-gray-200 dark:border-gray-800">
-            <h2 className="text-xl font-bold">New Task</h2>
-            <input
-              type="text"
-              placeholder="Task title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 focus:outline-none focus:border-blue-500"
-            />
-            <textarea
-              placeholder="Description (optional)"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              className="w-full px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 focus:outline-none focus:border-blue-500 resize-none"
-              rows={3}
-            />
-            <select
-              value={priority}
-              onChange={(e) => setPriority(e.target.value as any)}
-              className="w-full px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 focus:outline-none"
-            >
-              <option value="LOW">Low Priority</option>
-              <option value="MEDIUM">Medium Priority</option>
-              <option value="HIGH">High Priority</option>
-            </select>
-            <input
-              type="date"
-              value={dueDate}
-              onChange={(e) => setDueDate(e.target.value)}
-              className="w-full px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 focus:outline-none"
-            />
-            <div className="flex gap-3">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-white dark:bg-[#161b22] rounded-lg p-6 w-full max-w-md border border-gray-200 dark:border-[#30363d] shadow-xl">
+            <h2 className="text-lg font-semibold mb-5">New Task</h2>
+            <div className="space-y-3">
+              <input
+                type="text"
+                placeholder="Task title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className="w-full px-3 py-2 rounded-md bg-gray-50 dark:bg-[#0d1117] text-gray-900 dark:text-white border border-gray-200 dark:border-[#30363d] focus:outline-none focus:border-emerald-500 text-sm"
+              />
+              <textarea
+                placeholder="Description (optional)"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                className="w-full px-3 py-2 rounded-md bg-gray-50 dark:bg-[#0d1117] text-gray-900 dark:text-white border border-gray-200 dark:border-[#30363d] focus:outline-none focus:border-emerald-500 resize-none text-sm"
+                rows={3}
+              />
+              <select
+                value={priority}
+                onChange={(e) => setPriority(e.target.value as any)}
+                className="w-full px-3 py-2 rounded-md bg-gray-50 dark:bg-[#0d1117] text-gray-900 dark:text-white border border-gray-200 dark:border-[#30363d] focus:outline-none focus:border-emerald-500 text-sm"
+              >
+                <option value="LOW">Low Priority</option>
+                <option value="MEDIUM">Medium Priority</option>
+                <option value="HIGH">High Priority</option>
+              </select>
+              <input
+                type="date"
+                value={dueDate}
+                onChange={(e) => setDueDate(e.target.value)}
+                className="w-full px-3 py-2 rounded-md bg-gray-50 dark:bg-[#0d1117] text-gray-900 dark:text-white border border-gray-200 dark:border-[#30363d] focus:outline-none focus:border-emerald-500 text-sm"
+              />
+            </div>
+            <div className="flex gap-3 mt-5">
               <button
                 onClick={handleCreate}
-                className="flex-1 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium"
+                className="flex-1 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-md text-sm font-medium transition-all"
               >
                 Create
               </button>
               <button
                 onClick={() => setShowModal(false)}
-                className="flex-1 py-2 border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg"
+                className="flex-1 py-2 border border-gray-200 dark:border-[#30363d] hover:bg-gray-50 dark:hover:bg-[#21262d] rounded-md text-sm transition-all"
               >
                 Cancel
               </button>
