@@ -1,5 +1,7 @@
 "use client";
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
+
 import {
   DragDropContext,
   Droppable,
@@ -45,9 +47,9 @@ export default function KanbanBoard({ tasks, onStatusChange, onDelete }: Props) 
   const [localTasks, setLocalTasks] = useState<Task[]>(tasks);
 
   // Sync when parent updates
-  if (JSON.stringify(tasks) !== JSON.stringify(localTasks)) {
-    setLocalTasks(tasks);
-  }
+  useEffect(() => {
+  setLocalTasks(tasks);
+}, [tasks]);
 
   function onDragEnd(result: DropResult) {
     const { destination, source, draggableId } = result;
