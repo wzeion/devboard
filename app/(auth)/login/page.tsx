@@ -9,33 +9,34 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
+  e.preventDefault();
+  setLoading(true);
+  setError("");
 
-    try {
-      const res = await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-      });
+  try {
+    const res = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
 
-      if (!res) {
-        setError("Something went wrong. Please try again.");
-        setLoading(false);
-        return;
-      }
+    if (!res) {
+      setError("Something went wrong. Please try again.");
+      setLoading(false);
+      return;
+    }
 
-      if (res.error) {
-        setError("Invalid email or password");
-        setLoading(false);
-        return;
-      }
+    if (res.error) {
+      setError("Invalid email or password");
+      setLoading(false);
+      return;
+    }
 
-      if (res.ok) {
-        window.location.href = "/dashboard";
-      }
-    } catch {
+    if (res.ok) {
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      window.location.replace("/dashboard");
+    }
+  } catch {
       setError("Something went wrong. Please try again.");
       setLoading(false);
     }
@@ -89,7 +90,7 @@ export default function LoginPage() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                autoComplete="new-password"
+                autoComplete="current-password"
                 placeholder="••••••••"
                 className="mt-1 w-full px-3 py-2 rounded-md bg-gray-50 dark:bg-[#0d1117] text-gray-900 dark:text-white border border-gray-200 dark:border-[#30363d] focus:outline-none focus:border-emerald-500 text-sm transition-all"
               />
