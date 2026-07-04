@@ -1,7 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
   --background: #ffffff;
@@ -51,7 +50,6 @@ body {
   background: #484f58;
 }
 
-/* Page transition */
 @keyframes fadeUp {
   from {
     opacity: 0;
